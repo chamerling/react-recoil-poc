@@ -1,13 +1,8 @@
 import Identicon from "react-identicons";
+import { User } from "../types/User";
 import "./user.css";
 
-export type UserProps = {
-  id: number;
-  username: string;
-  online?: boolean;
-}
-
-const User = (props: UserProps): JSX.Element => {
+const UserAvatar = (props: User): JSX.Element => {
   return (
     <div className="user">
       <div className={`user_status ${props.online ? "online" : "offline"}`}></div>
@@ -16,4 +11,4 @@ const User = (props: UserProps): JSX.Element => {
   );
 }
 
-export default User;
+export default UserAvatar;

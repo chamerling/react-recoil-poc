@@ -37,10 +37,6 @@ function UserList(): JSX.Element {
     return () => clearInterval(intervalID);
   }, []);
 
-  const showUser = (user: User) => {
-    setSelectedUser(user);
-  }
-
   return (
     <>
     <div>Online users {onlineUsersCount}</div>
@@ -50,7 +46,7 @@ function UserList(): JSX.Element {
           <div
             style={{ padding: "5px" }}
             key={index}
-            onClick={() => showUser(user)}
+            onClick={() => setSelectedUser(user)}
           >
             <UserAvatar {...user}/>
           </div>

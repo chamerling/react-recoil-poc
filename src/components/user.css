@@ -1,0 +1,13 @@
+.user_status {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+}
+
+.online {
+  background: green;
+}
+
+.offline {
+  background: red;
+}

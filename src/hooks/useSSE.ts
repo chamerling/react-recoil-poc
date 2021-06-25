@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userListState } from "../recoil/atoms/userList";
 import { User } from "../types/User";
 
@@ -26,24 +26,11 @@ const useSSE = (path: string) =>  {
       const sseUser: Partial<User> = JSON.parse(e.data);
       console.log("SSE message", sseUser);
       const userIndex = users.findIndex(user => user.id === sseUser.id);
-      console.log(userIndex);
-
-      //const userIndex = users.findIndex(user => user.id === sseUser.id);
-      //if (!userIndex) {
-      //  return;
-      //}
-//
       const user = {...users[userIndex]};
-//
       user.online = sseUser.online;
-//
       setUsers((currentValue) => {
         return [...currentValue.slice(0, userIndex), user, ...currentValue.slice(userIndex + 1)];
       });
-
-//      setUserList((currentValue) => {
-//        return [...currentValue, user];
-//      });
     };
   }, [setUsers, users]);
 };

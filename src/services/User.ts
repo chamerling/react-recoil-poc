@@ -2,10 +2,12 @@ import { uniqueNamesGenerator, adjectives, colors, animals } from "unique-names-
 import { User } from "../types/User";
 
 const getUser = (id: number): Promise<User> => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(getOne(id));
-    }, 500);
+  return fetch(`http://localhost:8888/users/${id}`, {
+    //crossDomain: true,
+    method: 'GET',
+    headers: {'Content-Type':'application/json'},
+  }).then(response => {
+    return response.json();
   });
 };
 

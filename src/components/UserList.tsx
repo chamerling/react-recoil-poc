@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import UserAvatar from "./UserAvatar";
-import { onlineUsers } from "../recoil/selectors/onlineUsers";
+import { onlineUsersCount } from "../recoil/selectors/onlineUsersCount";
+import { totalUsersCount } from "../recoil/selectors/totalUsersCount";
 import { userListState } from "../recoil/atoms/userList";
 import { currentUser } from "../recoil/atoms/currentUser";
 import UserDetails from "./UserDetails";
@@ -11,7 +12,8 @@ function UserList(): JSX.Element {
   const savedCallback = useRef<() => void>();
   const userList = useRecoilValue<User[]>(userListState);
   const [selectedUser, setSelectedUser] = useRecoilState<User | undefined>(currentUser);
-  const onlineUsersCount = useRecoilValue(onlineUsers);
+  const onlineUsersCounter = useRecoilValue(onlineUsersCount);
+  const totalUsersCounter = useRecoilValue(totalUsersCount);
   const [users, setUsers] = useRecoilState(userListState);
 
   const refreshUserInfo = () => {
@@ -33,13 +35,13 @@ function UserList(): JSX.Element {
       savedCallback.current && savedCallback.current();
     }
 
-    const intervalID = setInterval(tick, 500);
+    const intervalID = setInterval(tick, 100);
     return () => clearInterval(intervalID);
   }, []);
 
   return (
     <>
-    <div>Online users {onlineUsersCount}</div>
+    <div>Online users {onlineUsersCounter}/{totalUsersCounter}</div>
     <div className="list" style={{ display: "flex", flexWrap: "wrap" }}>
       {
         userList.map((user, index) => (

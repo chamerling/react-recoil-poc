@@ -1,14 +1,16 @@
-import React from 'react';
 import UserList from './components/UserList';
-import { RecoilRoot } from 'recoil';
+import useSSE from './hooks/useSSE';
+import useGetOrFetch from './recoil/hooks/getOrFetch';
 
 function App() {
+  useSSE("http://localhost:8888/sse");
+  const fetch = useGetOrFetch();
+
   return (
-    <RecoilRoot>
-      <div>
-        <UserList/>
-      </div>
-    </RecoilRoot>
+    <div>
+      <UserList/>
+      <button onClick={() => fetch()}>Get or fetch</button>
+    </div>
   );
 }
 
